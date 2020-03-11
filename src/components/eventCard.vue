@@ -28,13 +28,17 @@
 </template>
 
 <script>
+import firebaseApp from '../firebaseinit';
+const db=firebaseApp.firestore();
 import {mapState ,mapMutations } from 'vuex';
 export default {
     name:"eventCard",
     props:["name","id"],
     computed:
     mapState([
-        'eventsInterested'
+        'eventsInterested',
+        'isLoggedIn',
+        'email'
     ]),
     data(){
         return{
@@ -61,12 +65,29 @@ export default {
         ,
 
         remove(name){
+            if(this.isLoggedIn)
+            {
             this.REMOVE_EVENT(name);
-
+            }
+            else{
+                alert("You have to Register first!");
+                this.$router.push('./register');
+            }
             //console.log(this.props.name);
         },
         add(name){
+
+            if(this.isLoggedIn)
+            {
+                db.collection('favEvents').add({email:this.email,name:name})
             this.ADD_EVENT(name);
+            }
+            else{
+                alert("You have to Register first!");
+                this.$router.push('./register');
+            }
+
+            
         }
     }
 

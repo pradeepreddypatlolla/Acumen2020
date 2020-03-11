@@ -10,7 +10,9 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import {mapState ,mapMutations} from 'vuex';
+import firebaseApp from '../firebaseinit';
+const db=firebaseApp.firestore();
 
 
 export default {
@@ -20,8 +22,39 @@ export default {
     },
 
     computed:mapState([
-        'eventsInterested'
+        'eventsInterested',
+        'email',
+        'profileCount'
+    ]),
+      methods:{
+
+    ...mapMutations([
+      'ADD_EVENT',
+      'INC_COUNT'
+
     ])
+
+  },
+
+      mounted(){
+
+if(this.profileCount==0)
+{
+this.INC_COUNT();
+    db.collection('favEvents').where('email','==',this.email).get().then(
+      querySnapShot=>{
+        querySnapShot.forEach(doc=>{
+          const data=doc.data().name;
+          this.ADD_EVENT(data);
+         // console.log(data);
+          
+        })
+      }
+    )
+
+
+  }
+      },
 
 }
 </script>

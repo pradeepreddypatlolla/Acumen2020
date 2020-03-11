@@ -8,18 +8,18 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item href="#">Home</b-nav-item>
+        <b-nav-item router-link to='/'>Home</b-nav-item>
 
           <b-nav-item-dropdown text="Technical Info">
-          <b-dropdown-item href="#">Events</b-dropdown-item>
-          <b-dropdown-item href="#">Project Expo</b-dropdown-item>
+          <b-dropdown-item router-link to='/Events'>Events</b-dropdown-item>
+          <b-dropdown-item >Project Expo</b-dropdown-item>
           <b-dropdown-item href="#">Inspire And Ignite</b-dropdown-item>
           <b-dropdown-item href="#">Paper And Poster Presentations</b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item  v-if="isLoggedIn" router-link to="/Profile" right>Profile</b-nav-item>
-        <b-nav-item v-on:click="reg()" v-else id="btn" right>Register</b-nav-item>
-        <b-nav-item  v-if="isLoggedIn"  right>Log Out</b-nav-item> 
-        <b-nav-item v-on:click="log()" v-else id="btn1" right>Login</b-nav-item> 
+        <b-nav-item router-link to="/register" v-else id="btn" right>Register</b-nav-item>
+        <b-nav-item  v-if="isLoggedIn" v-on:click="logout" right>Log Out</b-nav-item> 
+        <b-nav-item router-link to="/login" v-else id="btn1" right>Login</b-nav-item> 
       </b-navbar-nav> 
     </b-collapse>
   </b-navbar>
@@ -27,32 +27,32 @@
 </div>
 
 
-<div id="myModal" class="modal" style="display:none">
+<!-- <div id="myModal" class="modal" style="display:none">
 
-    <!-- Modal content -->
+    Modal content 
     <div class="modal-content">
       <span class="close">&times;</span>
               <div class="text-font" style="text-align: center;">REGISTER!</div>
-              <form  action="./register.php" method="POST">
+              <form method="post">
                   
                   <div class="form-group">
                       <label for="exampleInputEmail1">Email address</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+                      <input type="email" class="form-control" id="exampleInputEmail1" v-model="registerData.email" name="email" aria-describedby="emailHelp" placeholder="Enter email" required>
                      
                     </div>
           
                            <div class="form-group">
                               <label for="formGroupExampleInput">First Name</label>
-                              <input type="text" class="form-control" id="formGroupExampleInput" name="first" placeholder="First Name" required>
+                              <input type="text" class="form-control" id="formGroupExampleInput" v-model="registerData.first" name="first" placeholder="First Name" required>
                             </div>
                             <div class="form-group">
                               <label for="formGroupExampleInput">Last name</label>
-                              <input type="text" class="form-control" id="formGroupExampleInput" name="last" placeholder="Last Name" >
+                              <input type="text" class="form-control" id="formGroupExampleInput" v-model="registerData.last" name="last" placeholder="Last Name" >
                             </div>
                             
                               
                             <label for="formGroup">Gender</label>
-                            <select  class="form-control" name="gender" required>
+                            <select  class="form-control" name="gender" v-model="registerData.gender" required>
                       <option selected value="male">Male</option>
                       <option value="female">Female</option>
 
@@ -61,11 +61,11 @@
 
                                 <div class="form-group">
                               <label for="formGroupExampleInput">College</label>
-                              <input type="text" name="college" class="form-control" id="formGroupExampleInput" placeholder="College" required>
+                              <input type="text" name="college" class="form-control" v-model="registerData.college" id="formGroupExampleInput" placeholder="College" required>
                             </div>
           
                             <label for="formGroup">Branch</label>
-                            <select name="branch" class="form-control" required>
+                            <select name="branch" class="form-control" v-model="registerData.branch" required>
                       <option value="civil">Civil</option>
                       <option value="cse">CSE</option>
                       <option selected value="ece">ECE</option>
@@ -77,11 +77,11 @@
           
                     <div class="form-group">
                       <label for="exampleInputPassword1">Password</label>
-                      <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password" required>
+                      <input type="password" name="password" class="form-control" id="inputPassword" v-model="registerData.password" placeholder="Password" required>
                     </div>
           
                     <div id="error"> </div>
-                  <button type="submit" onclick="return check()" class="btn btn-primary btn-dark">Submit</button>
+                  <button type="submit" v-on:click="check()"  class="btn btn-primary btn-dark">Submit</button>
                 </form>
 
         
@@ -96,132 +96,197 @@
   <div class="modal-content" >
     <span class="close1">&times;</span>
     <span class="text-font" style="text-align: center;font-weight:600px;">LOGIN!</span>
-      <form class="form-signin"  method="POST" action="./login.php">
+      <form class="form-signin" method="post">
        
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" name="email"  class="form-control" placeholder="Email address" required autofocus>
+        <input type="email" id="inputEmail" name="email" v-model="loginData.email" class="form-control" placeholder="Email address" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="inputPassword" value="" class="form-control" placeholder="Password" required>
+        <input type="password" name="password" v-model="loginData.password" id="inputPassword" value="" class="form-control" placeholder="Password" required>
 
         
         
-        <button class="btn btn-lg btn-primary btn-block btn-dark" style="width:20%" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block btn-dark" v-on="loginsubmit()" style="width:20%" type="submit">Sign in</button>
         
       </form>
      </div> 
-    </div>
+    </div>-->
 
 </div>
 </template>
 
 <script>
-import {mapState} from 'vuex';
+
+
+import {mapState, mapMutations} from 'vuex';
+import firebaseApp from '../firebaseinit';
+// import firebase from 'firebase';
+
+// var firebaseConfig = {
+//     apiKey: "AIzaSyBURd_9zoVtlgPOAyN2dkjrG_HM0WbNSvM",
+//     authDomain: "vue-demo-84ee6.firebaseapp.com",
+//     databaseURL: "https://vue-demo-84ee6.firebaseio.com",
+//     projectId: "vue-demo-84ee6",
+//     storageBucket: "vue-demo-84ee6.appspot.com",
+//     messagingSenderId: "152461533104",
+//     appId: "1:152461533104:web:f92bf9899c511e01874075",
+//     measurementId: "G-DC5FW7V99K"
+//   };
+//   // Initialize Firebase
+//         if (!firebase.apps.length) {
+//           firebase.initializeApp(firebaseConfig);
+//        }
+
+
+  
+
+
+
 export default {
     name:"Navbar",
     computed:mapState([
       'isLoggedIn'
     ]),
 
-   methods: {
-     check(){
-
-    var uname = document.getElementById("inputPassword").value;
-   // document.getElementById('error').innerHTML = uname;
-    if(uname.length<8){
-        document.getElementById("error").innerHTML = "Password should be minimum 8 characters";
-        return false;
+    methods:{
+      ...mapMutations([
+        'SET_LOGOUT'
+      ]),
+      logout(){
+        firebaseApp.auth().signOut().then(()=>{
+          this.SET_LOGOUT();
+          this.$router.push('/login');
+        })
+      }
     }
-    else{
-        return true;
-    }
-},
+
+    // data(){
+    //   return{
+
+    //     registerData:{
+    //       email:'',
+    //       first:'',
+    //       last:'',
+    //       gender:'',
+    //       college:'',
+    //       branch:'',
+    //       password:''
+    //     },
+    //     loginData:{
+    //       email:'',
+    //       password:''
+    //     }
 
 
-     reg(){
+    //   }
+    // },
 
-       var modal = document.getElementById("myModal");
+//    methods: {
+//      check(){
+
+//     var uname = document.getElementById("inputPassword").value;
+//    // document.getElementById('error').innerHTML = uname;
+//     if(uname.length<8){
+//         document.getElementById("error").innerHTML = "Password should be minimum 8 characters";
+        
+//     }
+//     else{
+            
+//             firebase.auth().createUserWithEmailAndPassword(this.registerData.email,this.registerData.password);
+
+//     }
+// },
+
+
+//      reg(){
+
+//        var modal = document.getElementById("myModal");
 
   
-  // Get the button that opens the modal
+//   // Get the button that opens the modal
   
 
   
   
   
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
+//   // Get the <span> element that closes the modal
+//   var span = document.getElementsByClassName("close")[0];
   
   
-  // When the user clicks the button, open the modal 
+//   // When the user clicks the button, open the modal 
   
-    modal.style.display = "block";
+//     modal.style.display = "block";
     
   
   
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
+//   // When the user clicks on <span> (x), close the modal
+//   span.onclick = function() {
+//     modal.style.display = "none";
+//   }
   
   
 
   
   
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal ) {
-      modal.style.display = "none";
-      //modal1.style.display = "none";
-    }
-  }
-    }
-    ,
+//   // When the user clicks anywhere outside of the modal, close it
+//   window.onclick = function(event) {
+//     if (event.target == modal ) {
+//       modal.style.display = "none";
+//       //modal1.style.display = "none";
+//     }
+//   }
+//     }
+//     ,
 
-    log(){
+//     loginsubmit(){
+
+
+//     },
+
+//     log(){
 
     
   
-  var modal1 = document.getElementById("myModal1");
+//   var modal1 = document.getElementById("myModal1");
   
-  // Get the button that opens the modal
-  
-  
+//   // Get the button that opens the modal
   
   
   
   
-  // Get the <span> element that closes the modal
   
-  var span1 = document.getElementsByClassName("close1")[0];
   
-  // When the user clicks the button, open the modal 
+//   // Get the <span> element that closes the modal
+  
+//   var span1 = document.getElementsByClassName("close1")[0];
+  
+//   // When the user clicks the button, open the modal 
 
   
   
   
-    modal1.style.display = "block";
+//     modal1.style.display = "block";
     
   
   
-  // When the user clicks on <span> (x), close the modal
-  span1.onclick = function() {
-    modal1.style.display = "none";
-  }
+//   // When the user clicks on <span> (x), close the modal
+//   span1.onclick = function() {
+//     modal1.style.display = "none";
+//   }
   
   
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal1 ) {
-      modal1.style.display = "none";
-      //modal1.style.display = "none";
-    }
-  }
+//   // When the user clicks anywhere outside of the modal, close it
+//   window.onclick = function(event) {
+//     if (event.target == modal1 ) {
+//       modal1.style.display = "none";
+//       //modal1.style.display = "none";
+//     }
+//   }
 
 
-    }
+//     }
 
 
-   }
+//    }
 
 }
 </script>

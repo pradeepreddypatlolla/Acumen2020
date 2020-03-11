@@ -5,8 +5,12 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state:{
 
-        isLoggedIn:true,
+        isLoggedIn:false,
+        email:'',
+
         eventsInterested:[],
+        profileCount:0,
+
 
     },
     getters:{
@@ -22,7 +26,21 @@ export default new Vuex.Store({
         },
         REMOVE_EVENT:(state,name)=>{
             state.eventsInterested.splice(name,1);
-        }
+        },
+        
+        SET_LOGIN:(state)=>{
+            state.isLoggedIn=true;
+        },
+        SET_LOGOUT:(state)=>{
+            state.isLoggedIn=false;
+        },
+
+        SET_USER:(state,email)=>{
+            state.email=email;
+        },
+        INC_COUNT:(state)=>{
+            state.profileCount++;
+        },
 
 
     }

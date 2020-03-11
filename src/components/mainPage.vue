@@ -78,14 +78,26 @@ There is only one round and the best is chosen by the judges and the respective 
 <script>
 
 
+
 import Corosal from './corosal';
 export default {
   name: 'MainPage',
+  data(){
+    return{
+      favEvents:[]
+    }
+  },
+
+
   components: {
 
 Corosal
-  }
+  },
+
+
+
 }
+
 </script>
 
 
