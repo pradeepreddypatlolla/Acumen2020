@@ -78,10 +78,19 @@ There is only one round and the best is chosen by the judges and the respective 
 <script>
 
 
-
+import firebaseApp from '../firebaseinit';
+const db=firebaseApp.firestore();
 import Corosal from './corosal';
+import { mapState,mapMutations } from 'vuex';
 export default {
   name: 'MainPage',
+  computed:mapState([
+    'isLoggedIn',
+    'userData',
+            'eventsInterested',
+        'email',
+        'profileCount',
+  ]),
   data(){
     return{
       favEvents:[]
@@ -95,8 +104,63 @@ Corosal
   },
 
 
+methods:{
 
+    ...mapMutations([
+      'ADD_EVENT',
+      'INC_COUNT',
+      'SET_USER_DATA',
+
+    ])
+
+},
+
+  mounted(){
+
+    
+if(this.profileCount==0 && this.isLoggedIn)
+{
+this.INC_COUNT();
+    console.log("hello");
+    db.collection('favEvents').where('email','==',this.email).get().then(
+      querySnapShot=>{
+        querySnapShot.forEach(doc=>{
+           const data=doc.data().name;
+          this.ADD_EVENT(data);
+         // console.log(data);
+          
+        })
+      }
+    )
+
+    console.log("hello");
+
+                db.collection('users').where('email','==',this.email).get().then(
+      querySnapShot=>{
+        querySnapShot.forEach(doc=>{
+           const data=doc.data();
+           this.SET_USER_DATA(data);
+          
+          //this.ADD_EVENT(data);
+         console.log(data);
+          
+        })
+      }
+    )
+
+
+
+
+  }
+
+
+
+
+  }
 }
+
+
+
 
 </script>
 

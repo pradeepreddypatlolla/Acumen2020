@@ -149,11 +149,19 @@ export default {
 
     methods:{
       ...mapMutations([
-        'SET_LOGOUT'
+        'SET_LOGOUT',
+        'RESET_COUNT',
+        'RESET_EVENTS',
+        'RESET_USER_DATA',
       ]),
       logout(){
+        sessionStorage.clear();
         firebaseApp.auth().signOut().then(()=>{
           this.SET_LOGOUT();
+          this.RESET_COUNT();
+          this.RESET_EVENTS();
+          this.RESET_USER_DATA();
+          
           this.$router.push('/login');
         })
       }

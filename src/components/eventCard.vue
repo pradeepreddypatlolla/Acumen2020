@@ -68,6 +68,13 @@ export default {
             if(this.isLoggedIn)
             {
             this.REMOVE_EVENT(name);
+            db.collection('favEvents').where('email','==',this.email).where('name','==',name).
+            get().then((querySnapShot)=>{
+                querySnapShot.forEach((doc)=>{
+                    doc.ref.delete();
+                    
+                })
+            })
             }
             else{
                 alert("You have to Register first!");
@@ -78,9 +85,10 @@ export default {
         add(name){
 
             if(this.isLoggedIn)
-            {
+            { 
+                this.ADD_EVENT(name);
                 db.collection('favEvents').add({email:this.email,name:name})
-            this.ADD_EVENT(name);
+            
             }
             else{
                 alert("You have to Register first!");
