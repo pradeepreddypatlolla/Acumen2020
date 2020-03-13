@@ -1,7 +1,7 @@
 <template>
   <div id="login">
 
-
+    <div style="text-align:center; font-size:20px;margin-bottom:5%">LOGIN!</div>
 
     <b-form >
       <b-form-group
@@ -74,10 +74,12 @@ export default {
 </script>
 
 <style>
-
+@import url('https://fonts.googleapis.com/css?family=Alegreya+Sans+SC|Bungee+Inline|Julius+Sans+One|Press+Start+2P|Six+Caps&display=swap');
 #login{
     margin:20%;
     border-width:1px;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    
 }
 
 </style>

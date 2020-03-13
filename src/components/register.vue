@@ -1,6 +1,6 @@
 <template>
   <div id='register'>
-      
+      <div style="text-align:center;margin-bottom:5%;font-size:20px"> REGISTER!</div>
                   
                   <div class="form-group">
                       <label for="exampleInputEmail1">Email address</label>
@@ -114,10 +114,13 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css?family=Alegreya+Sans+SC|Bungee+Inline|Julius+Sans+One|Press+Start+2P|Six+Caps&display=swap');
 #register{
     padding-top:5% ;
     padding-left: 20%;
         padding-right: 20%;
+        font-family: 'Alegreya Sans SC', sans-serif;
+        
     
 }
 </style>

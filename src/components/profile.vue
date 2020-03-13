@@ -1,12 +1,14 @@
 <template>
 <div id="profile">
   <div >  Welcome {{userData.first}} {{userData.last}}  </div>
+  <div>YOUR PROFILE</div>
 
   <div >   {{userData.college}}   </div>
   <div >  {{userData.branch}}  </div>
-
+<div v-if='eventsInterested.length'>
   <div >  Your Interested Events are:  </div>
   <div  v-for="event in eventsInterested" :key="event" > {{event}}</div>
+</div>
 
   <div v-if="!expoBool">
     Your Title for Project Expo : {{expo_Title}}

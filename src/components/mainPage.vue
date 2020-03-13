@@ -365,29 +365,6 @@ this.INC_COUNT();
     
 
   }
-  #about:hover{
-      opacity:50%;
-  }
-  #social:hover{
-    opacity:50%;
-}
-#inspire:hover{
-    opacity:50%;
-}
-#expo:hover{
-  opacity:50%;
-}
-
-#paper:hover{
-    opacity:50%;
-}
-#sponsor:hover{
-  opacity:50%;
-}
-
-#events:hover{
-    opacity:50%;
-  }
   
   #expo{
     padding: 5%;
