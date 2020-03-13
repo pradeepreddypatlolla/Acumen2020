@@ -8,7 +8,11 @@ export default new Vuex.Store({
     state:{
 
         isLoggedIn:false,
+        expoBool:true,
+        paperBool:true,
         email:'',
+        expo_Title:'',
+        paper_Title:'',
 
         eventsInterested:[],
         profileCount:0,
@@ -75,6 +79,31 @@ export default new Vuex.Store({
             state.userData.college="";
             state.userData.branch="";
             state.userData.phone="";
+        },
+        SET_EXPO:(state)=>{
+            state.expoBool=false;
+        },
+        RESET_EXPO:(state)=>{
+            state.expoBool=true;
+        },
+        ADD_EXPO_TITLE:(state,title)=>{
+            state.expo_Title=title;
+        },
+
+        SET_PAPER:(state)=>{
+            state.paperBool=false;
+        },
+        RESET_PAPER:(state)=>{
+            state.paperBool=true;
+        },
+        ADD_PAPER_TITLE:(state,title)=>{
+            state.paper_Title=title;
+        },
+        RESET_EXPO_TITLE:(state)=>{
+            state.expo_Title='';
+        },
+        RESET_PAPER_TITLE:(state)=>{
+            state.paper_Title='';
         }
 
     },
@@ -82,7 +111,7 @@ export default new Vuex.Store({
 
     plugins: [createPersistedState({
         storage: window.sessionStorage,
-        paths: ['isLoggedIn','eventsInterested','email','profileCount']
+        paths: ['isLoggedIn','eventsInterested','email','profileCount','expoBool','paperBool','expo_Title','paper_title','userData']
      })]
 
 })

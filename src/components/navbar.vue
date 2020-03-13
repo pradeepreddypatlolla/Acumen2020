@@ -1,8 +1,8 @@
 <template>
 <div>
   <div id="Navbar">
- <b-navbar class="navbarcss" toggleable="lg" type="dark" variant="info">
-    <b-navbar-brand href="#">ACUMEN ECE 2K20</b-navbar-brand>
+ <b-navbar class="navbarcss"  toggleable="lg" type="dark" variant="info">
+    <b-navbar-brand router-link to='/' >ACUMEN ECE 2K20</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -13,8 +13,8 @@
           <b-nav-item-dropdown text="Technical Info">
           <b-dropdown-item router-link to='/Events'>Events</b-dropdown-item>
           <b-dropdown-item >Project Expo</b-dropdown-item>
-          <b-dropdown-item href="#">Inspire And Ignite</b-dropdown-item>
-          <b-dropdown-item href="#">Paper And Poster Presentations</b-dropdown-item>
+          <b-dropdown-item link="#inspire">Inspire And Ignite</b-dropdown-item>
+          <b-dropdown-item link="#paper">Paper And Poster Presentations</b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item  v-if="isLoggedIn" router-link to="/Profile" right>Profile</b-nav-item>
         <b-nav-item router-link to="/register" v-else id="btn" right>Register</b-nav-item>
@@ -153,6 +153,10 @@ export default {
         'RESET_COUNT',
         'RESET_EVENTS',
         'RESET_USER_DATA',
+        'RESET_EXPO',
+        'RESET_PAPER',
+        'RESET_EXPO_TITLE',
+        'RESET_PAPER_TITLE',
       ]),
       logout(){
         sessionStorage.clear();
@@ -161,6 +165,10 @@ export default {
           this.RESET_COUNT();
           this.RESET_EVENTS();
           this.RESET_USER_DATA();
+          this.RESET_EXPO();
+          this.RESET_PAPER();
+          this.RESET_EXPO_TITLE();
+          this.RESET_EXPO_TITLE();
           
           this.$router.push('/login');
         })

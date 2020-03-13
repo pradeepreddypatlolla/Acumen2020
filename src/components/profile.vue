@@ -1,12 +1,19 @@
 <template>
-<div class="row">
-  <div class="col"> <h2> Welcome {{userData.first}} {{userData.last}} </h2> </div>
+<div id="profile">
+  <div >  Welcome {{userData.first}} {{userData.last}}  </div>
 
-  <div class="col"> <h2>  {{userData.college}}  </h2> </div>
-  <div class="col"> <h2> {{userData.branch}}  </h2> </div>
+  <div >   {{userData.college}}   </div>
+  <div >  {{userData.branch}}  </div>
 
-  <div class="row"> <h2> Your Interested Events are: </h2> </div>
-  <div class="col" v-for="event in eventsInterested" :key="event" > {{event}}</div>
+  <div >  Your Interested Events are:  </div>
+  <div  v-for="event in eventsInterested" :key="event" > {{event}}</div>
+
+  <div v-if="!expoBool">
+    Your Title for Project Expo : {{expo_Title}}
+  </div>
+    <div v-if="!paperBool">
+    Your Title for Presentations : {{paper_Title}}
+  </div>
   
  
         
@@ -47,7 +54,11 @@ export default {
         'eventsInterested',
         'email',
         'profileCount',
-        'userData'
+        'userData',
+        'expo_Title',
+        'paper_Title',
+        'paperBool',
+        'expoBool'
     ]),
       methods:{
 
@@ -106,5 +117,12 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css?family=Alegreya+Sans+SC|Bungee+Inline|Julius+Sans+One|Press+Start+2P|Six+Caps&display=swap');
+
+#profile{
+  font-family: 'Alegreya Sans SC', sans-serif;
+  text-align: center;
+  margin:10%;
+}
 
 </style>
