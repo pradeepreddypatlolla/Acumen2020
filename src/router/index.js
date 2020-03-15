@@ -33,7 +33,7 @@ let router =new Router({
     },
     {
         path:'/',
-        name:'Main Page',
+        name:'MainPage',
         component:MainPage,
 
     },
@@ -66,6 +66,8 @@ router.beforeEach((to,from,next)=>{
         }
 
      }
+
+    
      
      else{
          next();

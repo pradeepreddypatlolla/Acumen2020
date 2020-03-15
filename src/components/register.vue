@@ -46,7 +46,7 @@
                   
                                 <div class="form-group">
                               <label for="formGroupExampleInput">Phone Number</label>
-                              <input type="number" name="phone" class="form-control" v-model="registerData.phone" id="formGroupExampleInput" placeholder="College" required>
+                              <input type="number" name="phone" class="form-control" v-model="registerData.phone" id="formGroupExampleInput" placeholder="Phone Number" required>
                             </div>
           
                     <div class="form-group">
@@ -114,12 +114,12 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Alegreya+Sans+SC|Bungee+Inline|Julius+Sans+One|Press+Start+2P|Six+Caps&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Bellota+Text&display=swap');
 #register{
     padding-top:5% ;
     padding-left: 20%;
         padding-right: 20%;
-        font-family: 'Alegreya Sans SC', sans-serif;
+font-family: 'Bellota Text', cursive;
         
     
 }

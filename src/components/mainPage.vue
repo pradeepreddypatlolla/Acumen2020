@@ -44,7 +44,7 @@ There is only one round and the best is chosen by the judges and the respective 
  <div v-if="paperBool" style="font-size:20px;margin-top:2%" v-on:click="paperFormOpen()">Interested? Click here to register</div>
  <div v-else style="font-size:20px;margin-top:2%">Registered</div>
  <div id="paperForm" >
- <input type="text" placeholder="Title" v-model="expoTitle"> <b-button v-on:click="paperFormSubmit()" >Submit</b-button>
+ <input type="text" placeholder="Title" v-model="paperTitle"> <b-button v-on:click="paperFormSubmit()" >Submit</b-button>
  </div>
  
  
@@ -75,10 +75,10 @@ There is only one round and the best is chosen by the judges and the respective 
 
 </div>
 
-<div id="social">
+<div  id="social">
   
 <div style="text-align:center" >Follow Us On </div>
- <div style="margin-left:27%">
+ <div style="display:flex;justify-content:center">
   <a href="#" class="fa fa-facebook"></a>
   <a href="#" class="fa fa-instagram"></a>
   <a href="#" class="fa fa-snapchat-ghost"></a>
@@ -86,6 +86,7 @@ There is only one round and the best is chosen by the judges and the respective 
 </div>
 <div style="text-align:center;font-size:10px"> Department of ECE. Vasavi College of Engineering </div>
 </div>
+
 </div>
 
 
@@ -150,9 +151,11 @@ expoFormOpen(){
 
   document.getElementById('expoForm').style.display='block';
   }
+  
   else{
+    this.$router.push('/register');
     alert('You have to register to the website first!');
-    this.$router.push('./register');
+    
   }
 },
 expoFormSubmit()
@@ -165,9 +168,10 @@ expoFormSubmit()
 
 alert('REGISTERED FOR PROJECT EXPO');
 document.getElementById('expoForm').style.display='none';
-  this.$router.push('/');
+
   this.SET_EXPO();
-  this.SET_EXPO_TITLE(this.expoTitle);
+  this.ADD_EXPO_TITLE(this.expoTitle);
+    this.$router.push('/');
   }).catch(error=>alert(error));
   
 },
@@ -181,7 +185,7 @@ paperFormOpen(){
   }
   else{
     alert('You have to register to the website first!');
-    this.$router.push('./register');
+    this.$router.push('/register');
   }
 },
 paperFormSubmit()
@@ -194,10 +198,11 @@ paperFormSubmit()
 
 alert('REGISTERED FOR PRESENTATIONS');
 document.getElementById('paperForm').style.display='none';
-  this.$router.push('/');
+  
 
   this.SET_PAPER();
-  this.SET_PAPER_TITLE(this.paperTitle);
+  this.ADD_PAPER_TITLE(this.paperTitle);
+  this.$router.push('/');
   }).catch(error=>alert(error));
   
 }
@@ -454,7 +459,7 @@ this.INC_COUNT();
     font-family: 'Julius Sans One', sans-serif;
   }
   #social{
-    padding: 5%;
+    padding-left:5%;
     width:100%;
     height: 10%;
 

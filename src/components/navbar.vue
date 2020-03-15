@@ -1,6 +1,6 @@
 <template>
-<div>
-  <div id="Navbar">
+<div >
+  <div id="Navbar" >
  <b-navbar class="navbarcss"  toggleable="lg" type="dark" variant="info">
     <b-navbar-brand router-link to='/' >ACUMEN ECE 2K20</b-navbar-brand>
 
