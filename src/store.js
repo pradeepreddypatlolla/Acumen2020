@@ -111,7 +111,7 @@ export default new Vuex.Store({
 
     plugins: [createPersistedState({
         storage: window.sessionStorage,
-        paths: ['isLoggedIn','eventsInterested','email','profileCount','expoBool','paperBool','expo_Title','paper_title','userData']
+        paths: ['isLoggedIn','eventsInterested','email','profileCount','expoBool','paperBool','expo_Title','paper_Title','userData']
      })]
 
 })
